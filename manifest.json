@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+
+  "name": "Playlistr for VK",
+  "description": "BlahBlah VK playlist generator",
+  "version": "1.1",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+   "content_scripts": [
+    {
+      "matches": [ "https://vk.com/*" ],
+      "js": [ "jquery.js", "injector.js" ],
+	  "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/script.js"
+  ]
+}
