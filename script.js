@@ -3,6 +3,7 @@
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
 
   var _SAVEPLAYLISTHASH_ = ''
+  var body = document.body || document.getElementsByTagName('body')[0] || document.querySelector('body')
 
 /*
   TBD: warn user that he doesn't own any playlists,
@@ -104,10 +105,15 @@
           generateButtons(mutation.addedNodes[i])
         }
       }
+      var body = document.querySelector('body')
+      observer.observe(body, {
+        childList: true,
+        subtree: true
+      })
     })
   })
 
-  observer.observe(document.body, {
+  observer.observe(body, {
     childList: true,
     subtree: true
   })
