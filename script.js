@@ -2,7 +2,7 @@
 (() => {
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver
 
-  var _SAVEPLAYLISTHASH_ = ''
+  var _newPlaylistHash_ = ''
   var body = document.body || document.getElementsByTagName('body')[0] || document.querySelector('body')
 
 /*
@@ -73,7 +73,7 @@
     let playlistName = document.getElementById('playlistName').value
     let description = document.getElementById('description').value
     // cur.audioPage._data.createPlaylistHash
-    let savePlaylistHash = _SAVEPLAYLISTHASH_
+    let savePlaylistHash = _newPlaylistHash_
     // cur.audioPage._data.createPlaylistHash
     let vkid = window.vk.id
     let tracks = item.querySelectorAll('.audio_row')
@@ -123,8 +123,8 @@
 */
 
   if (window.location.href === `https://vk.com/audios${window.vk.id}`) {
-    _SAVEPLAYLISTHASH_ = window.cur.audioPage._data.createPlaylistHash
-    var data = { type: 'SAVE_HASH', payload: _SAVEPLAYLISTHASH_ }
+    _newPlaylistHash_ = window.cur.audioPage._data.newPlaylistHash
+    var data = { type: 'SAVE_HASH', payload: _newPlaylistHash_ }
     window.postMessage(data, '*')
   }
 
@@ -133,7 +133,7 @@
   If it's empty, it will redirect to /audios{vk.id}, where hash is present
 */
 
-  if (_SAVEPLAYLISTHASH_ === '') {
+  if (_newPlaylistHash_ === '') {
     var data = { type: 'REQUEST_HASH', payload: window.vk.id }
     window.postMessage(data, '*')
   }
@@ -147,7 +147,7 @@
     }
 
     if (event.data.type && (event.data.type === 'SEND_HASH')) {
-      _SAVEPLAYLISTHASH_ = event.data.payload
+      _newPlaylistHash_ = event.data.payload
     }
   })
 
